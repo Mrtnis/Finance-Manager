@@ -52,6 +52,11 @@
           </div>
         </div>
       </div>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div @click="logout" class="btn btn-back py-2 px-4">Logout</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -69,7 +74,7 @@ export default {
     logout() {
       Swal.fire({
         title: 'Are you sure?',
-        text: 'Your data will be delete when you logout',
+        text: 'Your data will be deleted when you logout',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -106,5 +111,8 @@ export default {
 }
 .bi-wallet2 {
   font-size: 25px;
+}
+.btn-back {
+  float: right;
 }
 </style>

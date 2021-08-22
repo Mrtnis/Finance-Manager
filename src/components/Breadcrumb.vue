@@ -1,8 +1,8 @@
 <template>
   <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
-      <li class="breadcrumb-item"><router-link to="/about">About</router-link></li>
+    <ol class="breadcrumb fw-bold">
+      <li class="breadcrumb-item"><router-link to="/">Menu</router-link></li>
+      <li class="breadcrumb-item">Bank</li>
     </ol>
   </nav>
 </template>

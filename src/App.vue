@@ -17,4 +17,14 @@ export default {
 * {
   font-family: 'Open Sans', sans-serif;
 }
+.btn-back {
+  border-radius: 10px;
+  background-color: #e63946;
+  color: white;
+}
+.btn-save {
+  border-radius: 10px;
+  background-color: #4361ee;
+  color: white;
+}
 </style>

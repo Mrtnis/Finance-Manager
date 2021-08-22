@@ -77,11 +77,6 @@ export default {
 input {
   border-radius: 10px;
 }
-.btn-save {
-  border-radius: 10px;
-  background-color: #4361ee;
-  color: white;
-}
 
 /* For mobile phones: */
 @media only screen and (max-width: 768px) {
