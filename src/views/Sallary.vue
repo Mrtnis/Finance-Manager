@@ -19,7 +19,7 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="card shadow fitur-box">
-                    <router-link to="/sallary" class="btn">
+                    <router-link to="/daily" class="btn">
                       <div class="card-body">
                         <i class="bi bi-cash-coin"></i>
                         <div class="fitur-text">Daily</div>

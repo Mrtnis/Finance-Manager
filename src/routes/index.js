@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import Sallary from '../views/Sallary.vue';
 import Bank from '../views/Bank.vue';
+import Daily from '../views/Daily.vue';
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     path: '/bank',
     name: 'Bank',
     component: Bank,
+  },
+  {
+    path: '/daily',
+    name: 'Daily',
+    component: Daily,
   },
 ];
 

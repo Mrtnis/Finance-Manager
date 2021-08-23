@@ -16,7 +16,14 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="sallary">
+      <div class="row">
+        <div class="col">
+          <h6 class="text-muted mb-4">
+            <i class="bi bi-wallet2"></i> <b>Rp. {{ Intl.NumberFormat().format(my_sallary) }}</b>
+          </h6>
+        </div>
+      </div>
+      <div class="sallary mb-3">
         <label for="bank" class="form-label text-muted"><b>Input field below to add your saving</b></label>
         <input @keyup.enter="save" type="number" class="form-control py-2" id="bank" placeholder="Example : 5000000" v-model.number="moneySaving" />
         <small class="mt-1" v-if="error">
@@ -36,14 +43,19 @@ export default {
       bank: 0,
       moneySaving: null,
       error: false,
+      my_sallary: 0,
     };
   },
   mounted() {
     this.getBank();
+    this.getSallary();
   },
   methods: {
     getBank() {
       this.bank = localStorage.getItem('my_bank') || 0;
+    },
+    getSallary() {
+      this.my_sallary = localStorage.getItem('my_sallary');
     },
     save() {
       const sallary = localStorage.getItem('my_sallary');
@@ -58,6 +70,7 @@ export default {
         const reduce = sallary - this.moneySaving;
         localStorage.setItem('my_sallary', reduce);
         this.getBank();
+        this.getSallary();
         this.moneySaving = null;
         Swal.fire('Yeeeaaaayyyy!', 'Your saving is added. ', 'success');
       }
@@ -70,6 +83,11 @@ export default {
 .text-bank {
   text-align: center;
   align-self: center;
+}
+.bi-wallet2 {
+  color: #4361ee;
+  font-size: 25px;
+  margin-right: 10px;
 }
 .card {
   border-color: #4361ee;
