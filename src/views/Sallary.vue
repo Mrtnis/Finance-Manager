@@ -85,6 +85,8 @@ export default {
           localStorage.removeItem('my_name');
           localStorage.removeItem('my_sallary');
           localStorage.removeItem('date_login');
+          localStorage.removeItem('my_bank');
+          localStorage.removeItem('daily');
           this.$router.push({ name: 'Home' });
           Swal.fire('Logout!', 'You has been logout.', 'success');
         }
