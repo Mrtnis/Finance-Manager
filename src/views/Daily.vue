@@ -52,7 +52,7 @@
                     <td class="p-3">{{ index + 1 }}</td>
                     <td>{{ expense.desc.toUpperCase() }}</td>
                     <td>Rp. {{ Intl.NumberFormat().format(expense.money) }}</td>
-                    <td @click="deleteExpense(index)"><i class="bi bi-x text-danger btn"></i></td>
+                    <td @click="deleteExpense(expense.id)"><i class="bi bi-x text-danger btn"></i></td>
                   </tr>
                 </tbody>
               </table>
@@ -83,6 +83,7 @@ export default {
       dailyStorage: [],
       my_sallary: 0,
       data: {
+        id: new Date().getTime(),
         desc: '',
         money: null,
         hour: new Date().getHours(),
@@ -131,13 +132,27 @@ export default {
           Swal.fire('Yeeeaaaayyyy!', 'Your daily expenses have been added. ', 'success');
           this.data.desc = '';
           this.data.money = null;
+          this.$router.go();
         }
       }
     },
     deleteExpense(param) {
-      this.dailyTable.forEach((x, index) => {
-        if (param == index) {
-          console.log(x);
+      Swal.fire({
+        text: 'Are you sure to delete this data?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: "Yes, I'm Sure",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.dailyStorage = this.dailyStorage.filter((item) => {
+            return item.id !== param;
+          });
+          localStorage['daily'] = JSON.stringify(this.dailyStorage);
+          this.updateDaily();
+          this.updateTable();
+          Swal.fire('Delete', 'Your data has been deleted.', 'success');
         }
       });
     },
