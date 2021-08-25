@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="card shadow fitur-box">
-                    <router-link to="/sallary" class="btn">
+                    <router-link to="/report" class="btn">
                       <div class="card-body">
                         <i class="bi bi-file-earmark-check"></i>
                         <div class="fitur-text">Report</div>

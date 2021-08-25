@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import Sallary from '../views/Sallary.vue';
 import Bank from '../views/Bank.vue';
 import Daily from '../views/Daily.vue';
+import Report from '../views/Report.vue';
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: '/daily',
     name: 'Daily',
     component: Daily,
+  },
+  {
+    path: '/report',
+    name: 'Report',
+    component: Report,
   },
 ];
 
