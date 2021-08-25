@@ -52,7 +52,7 @@
           </div>
         </div>
       </div>
-      <div class="row justify-content-center">
+      <div class="row justify-content-center mb-4">
         <div class="col-md-6">
           <div @click="logout" class="btn btn-back py-2 px-4">Logout</div>
         </div>

@@ -103,7 +103,7 @@ export default {
     },
     updateTable() {
       this.dailyTable = this.dailyStorage.filter((item) => {
-        return item.day == new Date().getDay();
+        return item.day == this.data.day && item.month == this.data.month;
       });
     },
     getSallary() {
