@@ -89,6 +89,7 @@ export default {
         hour: new Date().getHours(),
         day: new Date().getDay(),
         month: new Date().toLocaleString('default', { month: 'long' }),
+        year: new Date().getFullYear(),
       },
     };
   },
@@ -103,7 +104,7 @@ export default {
     },
     updateTable() {
       this.dailyTable = this.dailyStorage.filter((item) => {
-        return item.day == this.data.day && item.month == this.data.month;
+        return item.day == this.data.day && item.month == this.data.month && item.year == this.data.year;
       });
     },
     getSallary() {
@@ -146,10 +147,17 @@ export default {
         confirmButtonText: "Yes, I'm Sure",
       }).then((result) => {
         if (result.isConfirmed) {
+          let data = this.dailyStorage.filter((item) => {
+            return item.id === param;
+          });
+          let money = data[0].money;
+          const add = parseInt(this.my_sallary) + parseInt(money);
           this.dailyStorage = this.dailyStorage.filter((item) => {
             return item.id !== param;
           });
+          localStorage.setItem('my_sallary', add);
           localStorage['daily'] = JSON.stringify(this.dailyStorage);
+          this.getSallary();
           this.updateDaily();
           this.updateTable();
           Swal.fire('Delete', 'Your data has been deleted.', 'success');
