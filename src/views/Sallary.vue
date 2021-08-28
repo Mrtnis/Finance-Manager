@@ -14,8 +14,16 @@
                   <i class="bi bi-wallet2"></i> <b>Rp. {{ Intl.NumberFormat().format(sallary) }}</b>
                 </div>
               </div>
+              <div class="row g-2 mt-2">
+                <div class="col-auto">
+                  <input type="number" @keyup.enter="addSallary" class="form-control" v-model.number="newSallary" placeholder="Add your sallary" />
+                </div>
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-save mb-3" @click="addSallary">Add Sallary</button>
+                </div>
+              </div>
             </h6>
-            <div class="mt-5">
+            <div class="mt-4">
               <div class="row">
                 <div class="col-md-4">
                   <div class="card shadow fitur-box">
@@ -67,10 +75,17 @@ export default {
   data() {
     return {
       username: localStorage.getItem('my_name'),
-      sallary: localStorage.getItem('my_sallary'),
+      sallary: 0,
+      newSallary: null,
     };
   },
+  mounted() {
+    this.updateSallary();
+  },
   methods: {
+    updateSallary() {
+      this.sallary = localStorage.getItem('my_sallary');
+    },
     logout() {
       Swal.fire({
         title: 'Are you sure?',
@@ -91,6 +106,18 @@ export default {
           Swal.fire('Logout!', 'You has been logout.', 'success');
         }
       });
+    },
+    addSallary() {
+      if (this.newSallary === '' || this.newSallary === 0 || this.newSallary === null) {
+        Swal.fire('Oooops!', "New sallary can't be null or zero. ", 'error');
+      } else {
+        const oldSallary = localStorage.getItem('my_sallary');
+        const add = parseInt(oldSallary) + this.newSallary;
+        localStorage.setItem('my_sallary', add);
+        this.updateSallary();
+        Swal.fire('Yeeaaayy!', 'Your sallary has been added.', 'success');
+        this.newSallary = null;
+      }
     },
   },
 };
@@ -116,5 +143,8 @@ export default {
 }
 .btn-back {
   float: right;
+}
+input {
+  border-radius: 10px;
 }
 </style>
