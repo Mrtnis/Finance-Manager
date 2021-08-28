@@ -83,13 +83,13 @@ export default {
       dailyStorage: [],
       my_sallary: 0,
       data: {
-        id: new Date().getTime(),
+        id: 0,
         desc: '',
         money: null,
-        hour: new Date().getHours(),
-        day: new Date().getDay(),
-        month: new Date().toLocaleString('default', { month: 'long' }),
-        year: new Date().getFullYear(),
+        hour: 0,
+        date: 0,
+        month: '',
+        year: 0,
       },
     };
   },
@@ -104,7 +104,7 @@ export default {
     },
     updateTable() {
       this.dailyTable = this.dailyStorage.filter((item) => {
-        return item.day == this.data.day && item.month == this.data.month && item.year == this.data.year;
+        return item.date == new Date().getDate() && item.month == new Date().toLocaleString('default', { month: 'long' }) && item.year == new Date().getFullYear();
       });
     },
     getSallary() {
@@ -123,6 +123,11 @@ export default {
         if (this.data.money > my_money) {
           Swal.fire('Ooopss!', 'Your sallary is not enough. ', 'error');
         } else {
+          this.data.id = new Date().getTime();
+          this.data.hour = new Date().getHours();
+          this.data.date = new Date().getDate();
+          this.data.month = new Date().toLocaleString('default', { month: 'long' });
+          this.data.year = new Date().getFullYear();
           this.dailyStorage.push(this.data);
           localStorage['daily'] = JSON.stringify(this.dailyStorage);
           this.updateDaily();
@@ -133,7 +138,6 @@ export default {
           Swal.fire('Yeeeaaaayyyy!', 'Your daily expenses have been added. ', 'success');
           this.data.desc = '';
           this.data.money = null;
-          this.$router.go();
         }
       }
     },

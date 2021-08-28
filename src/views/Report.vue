@@ -6,7 +6,7 @@
   </div>
   <div class="row mb-4">
     <div class="col-md-6">
-      <div class="card shadow border-0">
+      <div class="card shadow border-0" id="print">
         <div class="card-body mt-3">
           <h5 class="text-center fw-bolder">Report Your Finance In {{ new Date().toLocaleString('default', { month: 'long' }) }}</h5>
           <hr class="mx-5 d-md-block d-none" />
@@ -16,25 +16,29 @@
           <table class="table table-bordered text-center">
             <thead>
               <tr>
+                <th scope="col">#</th>
                 <th scope="col">Date</th>
-                <th scope="col">Total</th>
+                <th scope="col">Description</th>
+                <th scope="col">Money</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Rp. 50.000</td>
+              <tr v-for="(data, index) in monthlyStorage" :key="index">
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ data.date }}</td>
+                <td>{{ data.desc }}</td>
+                <td>Rp. {{ Intl.NumberFormat().format(data.money) }}</td>
               </tr>
               <tr>
-                <th scope="row">2</th>
-                <td>Rp. 50.000</td>
+                <th colspan="3">Total</th>
+                <th>Rp. {{ Intl.NumberFormat().format(total) }}</th>
               </tr>
             </tbody>
           </table>
           <div class="row">
             <div class="col">
               <div class="date">
-                <small>{{ getDate }}</small>
+                <small>{{ getDateToday }}</small>
               </div>
             </div>
           </div>
@@ -42,9 +46,9 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-4">
     <div class="col-md-6">
-      <div class="btn btn-save"><small>Print Report</small></div>
+      <div @click="printReport" class="btn btn-save"><small>Print Report</small></div>
     </div>
   </div>
 </template>
@@ -57,7 +61,7 @@ export default {
       date: new Date().getDate(),
       month: new Date().toLocaleString('default', { month: 'long' }),
       year: new Date().getFullYear(),
-      dailyStorage: [],
+      monthlyStorage: [],
     };
   },
   mounted() {
@@ -65,13 +69,23 @@ export default {
   },
   methods: {
     updateStorage() {
-      this.dailyStorage = JSON.parse(localStorage.getItem('daily')) || [];
-      console.log(this.dailyStorage);
+      const allData = JSON.parse(localStorage.getItem('daily')) || [];
+      this.monthlyStorage = allData.filter((item) => {
+        return item.month == this.month && item.year == this.year;
+      });
+    },
+    printReport() {
+      window.print();
     },
   },
   computed: {
-    getDate() {
+    getDateToday() {
       return this.date + ' ' + this.month + ' ' + this.year;
+    },
+    total() {
+      return this.monthlyStorage.reduce(function (item, data) {
+        return item + data.money;
+      }, 0);
     },
   },
 };
@@ -89,5 +103,14 @@ export default {
 }
 .date {
   float: right;
+}
+
+@media print {
+  * {
+    visibility: hidden;
+  }
+  #print * {
+    visibility: visible;
+  }
 }
 </style>
