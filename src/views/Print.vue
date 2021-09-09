@@ -1,9 +1,4 @@
 <template>
-  <div class="row mb-5">
-    <div class="col-md">
-      <router-link class="btn btn-back py-2 px-4" to="/sallary">Back To Menu</router-link>
-    </div>
-  </div>
   <div class="row mb-4">
     <div class="col-md-6">
       <div class="card shadow border-0" id="print">
@@ -46,16 +41,11 @@
       </div>
     </div>
   </div>
-  <div class="row mb-4">
-    <div class="col-md-6">
-      <div @click="printReport" class="btn btn-save"><small>Print Report</small></div>
-    </div>
-  </div>
 </template>
 
 <script>
 export default {
-  name: 'Report',
+  name: 'Print',
   data() {
     return {
       date: new Date().getDate(),
@@ -66,6 +56,9 @@ export default {
   },
   mounted() {
     this.updateStorage();
+    setTimeout(() => {
+      window.print();
+    }, 1000);
   },
   methods: {
     updateStorage() {
@@ -73,9 +66,6 @@ export default {
       this.monthlyStorage = allData.filter((item) => {
         return item.month == this.month && item.year == this.year;
       });
-    },
-    printReport() {
-      this.$router.push({ name: 'Print' });
     },
   },
   computed: {
