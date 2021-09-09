@@ -4,7 +4,8 @@
   "scripts": {
     "serve": "vite preview",
     "build": "vite build",
-    "dev": "vite"
+    "dev": "vite",
+    "deploy": "sh deploy.sh"
   },
   "dependencies": {
     "register-service-worker": "^1.7.1",
