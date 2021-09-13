@@ -6,6 +6,7 @@ import Bank from '../views/Bank.vue';
 import Daily from '../views/Daily.vue';
 import Report from '../views/Report.vue';
 import Print from '../views/Print.vue';
+import NotFound from '../views/NotFound.vue';
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     path: '/print',
     name: 'Print',
     component: Print,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound,
   },
 ];
 
